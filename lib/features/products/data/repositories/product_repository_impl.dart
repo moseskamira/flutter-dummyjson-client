@@ -38,4 +38,18 @@ class ProductRepositoryImpl implements ProductRepository {
       return NetworkResponse(false, error: error);
     }
   }
+
+  @override
+  Future<NetworkResponse> getProductsCategories() async {
+    try {
+      final response = await apiClient.getProductsCategories();
+      return NetworkResponse(true, data: response);
+    } on DioException catch (e) {
+      final message = e.response?.data['message'];
+      return NetworkResponse(false, error: message);
+    } catch (e) {
+      final error = e.toString();
+      return NetworkResponse(false, error: error);
+    }
+  }
 }
