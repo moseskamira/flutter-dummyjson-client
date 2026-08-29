@@ -38,4 +38,18 @@ class PostRepositoryImpl implements PostRepository {
       return NetworkResponse(false, error: error);
     }
   }
+
+  @override
+  Future<NetworkResponse> getPostById(String postId) async {
+    try {
+      final response = await apiClient.getPostById(postId);
+      return NetworkResponse(true, data: response);
+    } on DioException catch (e) {
+      final message = e.response?.data?['message'];
+      return NetworkResponse(false, error: message);
+    } catch (e) {
+      final error = e.toString();
+      return NetworkResponse(false, error: error);
+    }
+  }
 }
