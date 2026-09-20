@@ -22,8 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiProvider(
       providers: [
+        // Repositories
         RepositoryProvider<AuthRepositoryImpl>(
           create: (_) => AuthRepositoryImpl(),
         ),
@@ -42,48 +43,42 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<PostRepositoryImpl>(
           create: (_) => PostRepositoryImpl(),
         ),
-      ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthCubit>(
-            lazy: true,
-            create: (context) => AuthCubit(context.read<AuthRepositoryImpl>()),
-          ),
-          BlocProvider<ProfileCubit>(
-            lazy: true,
-            create: (context) =>
-                ProfileCubit(context.read<ProfileRepositoryImpl>()),
-          ),
-          BlocProvider<UserCubit>(
-            lazy: true,
-            create: (context) => UserCubit(context.read<UserRepositoryImpl>()),
-          ),
-          BlocProvider<ProductCubit>(
-            lazy: true,
-            create: (context) =>
-                ProductCubit(context.read<ProductRepositoryImpl>()),
-          ),
-          BlocProvider<CartCubit>(
-            lazy: true,
-            create: (context) => CartCubit(context.read<CartRepositoryImpl>()),
-          ),
-          BlocProvider<PostCubit>(
-            lazy: true,
-            create: (context) => PostCubit(context.read<PostRepositoryImpl>()),
-          ),
-        ],
-        child: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => AppStateProvider()),
-          ],
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'DummyJson Demo',
-            theme: AppTheme.lightTheme(),
-            themeMode: ThemeMode.light,
-            routerConfig: appRouter,
-          ),
+        // Change Notifier
+        ChangeNotifierProvider(create: (_) => AppStateProvider()),
+        // Blocs
+        BlocProvider<AuthCubit>(
+          lazy: true,
+          create: (context) => AuthCubit(context.read<AuthRepositoryImpl>()),
         ),
+        BlocProvider<ProfileCubit>(
+          lazy: true,
+          create: (context) =>
+              ProfileCubit(context.read<ProfileRepositoryImpl>()),
+        ),
+        BlocProvider<UserCubit>(
+          lazy: true,
+          create: (context) => UserCubit(context.read<UserRepositoryImpl>()),
+        ),
+        BlocProvider<ProductCubit>(
+          lazy: true,
+          create: (context) =>
+              ProductCubit(context.read<ProductRepositoryImpl>()),
+        ),
+        BlocProvider<CartCubit>(
+          lazy: true,
+          create: (context) => CartCubit(context.read<CartRepositoryImpl>()),
+        ),
+        BlocProvider<PostCubit>(
+          lazy: true,
+          create: (context) => PostCubit(context.read<PostRepositoryImpl>()),
+        ),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'DummyJson Demo',
+        theme: AppTheme.lightTheme(),
+        themeMode: ThemeMode.light,
+        routerConfig: appRouter,
       ),
     );
   }
