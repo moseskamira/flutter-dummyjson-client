@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:dummy_json_api/features/auth/data/models/login_response.dart';
 import 'package:dummy_json_api/features/carts/data/models/cart.dart';
 import 'package:dummy_json_api/features/carts/data/models/carts_response.dart';
+import 'package:dummy_json_api/features/posts/data/models/post.dart';
 import 'package:dummy_json_api/features/posts/data/models/posts_response.dart';
+import 'package:dummy_json_api/features/products/data/models/category.dart';
 import 'package:dummy_json_api/features/products/data/models/product.dart';
 import 'package:dummy_json_api/features/products/data/models/product_response.dart';
 import 'package:dummy_json_api/features/profile/data/models/user_profile_dto.dart';
@@ -37,6 +39,9 @@ abstract class ApiClient {
   @GET(Apis.product)
   Future<Product> getProduct(@Path('id') String prodId);
 
+  @GET(Apis.productCategories)
+  Future<List<Category>> getProductsCategories();
+
   @GET(Apis.carts)
   Future<CartsResponse> getCarts();
 
@@ -45,6 +50,9 @@ abstract class ApiClient {
 
   @GET(Apis.posts)
   Future<PostsResponse> getPosts();
+
+  @GET(Apis.post)
+  Future<dynamic> getPostById(@Path('id') String postId);
 
   @GET(Apis.userPosts)
   Future<PostsResponse> getUserPosts(@Path('id') String userId);

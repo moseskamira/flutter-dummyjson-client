@@ -1,3 +1,4 @@
+import 'package:dummy_json_api/features/posts/data/models/post.dart';
 import 'package:dummy_json_api/features/posts/data/models/posts_response.dart';
 import 'package:dummy_json_api/features/posts/domain/repositories/post_repository.dart';
 import 'package:dummy_json_api/features/posts/logic/post_state.dart';
@@ -30,6 +31,20 @@ class PostCubit extends Cubit<PostState> {
     } else {
       final message = response.error ?? 'Something wrong happened';
       emit(UserPostsError(message: message));
+    }
+  }
+
+  Future<void> getPostByID(String postId) async {
+    emit(GetPostByIDLoading());
+    final response = await repository.getPostById(postId);
+    if (response.success) {
+      final responseData = response.data;
+      final postData = Post.fromJson(responseData);
+      print('POSTGOTTEN:${postData.toJson()}');
+      emit(GetPostByIDSuccess(post: postData));
+    } else {
+      final message = response.error ?? 'Something wrong happened';
+      emit(GetPostByIDError(message: message));
     }
   }
 }

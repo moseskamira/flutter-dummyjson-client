@@ -1,3 +1,4 @@
+import 'package:dummy_json_api/features/products/data/models/category.dart';
 import 'package:dummy_json_api/features/products/data/models/product.dart';
 import 'package:equatable/equatable.dart';
 
@@ -12,6 +13,8 @@ class GPLoading extends ProductState {}
 
 class GetSingleProductLoading extends ProductState {}
 
+class GetProductsCategoriesLoading extends ProductState {}
+
 class GPSuccess extends ProductState {
   final List<Product> products;
 
@@ -19,6 +22,15 @@ class GPSuccess extends ProductState {
 
   @override
   List<Object?> get props => [products];
+}
+
+class GetProductsCategoriesSuccess extends ProductState {
+  final List<Category> categories;
+
+  GetProductsCategoriesSuccess({required this.categories});
+
+  @override
+  List<Object?> get props => [categories];
 }
 
 class GetSingleProductSuccess extends ProductState {
@@ -34,6 +46,15 @@ class GPError extends ProductState {
   final String message;
 
   GPError({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class GetProductsCategoriesError extends ProductState {
+  final String message;
+
+  GetProductsCategoriesError({required this.message});
 
   @override
   List<Object?> get props => [message];
