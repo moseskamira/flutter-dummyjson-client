@@ -24,53 +24,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Repositories
-        RepositoryProvider<AuthRepositoryImpl>(
-          create: (_) => AuthRepositoryImpl(),
-        ),
-        RepositoryProvider<ProfileRepositoryImpl>(
-          create: (_) => ProfileRepositoryImpl(),
-        ),
-        RepositoryProvider<UserRepositoryImpl>(
-          create: (_) => UserRepositoryImpl(),
-        ),
-        RepositoryProvider<ProductRepositoryImpl>(
-          create: (_) => ProductRepositoryImpl(),
-        ),
-        RepositoryProvider<CartRepositoryImpl>(
-          create: (_) => CartRepositoryImpl(),
-        ),
-        RepositoryProvider<PostRepositoryImpl>(
-          create: (_) => PostRepositoryImpl(),
-        ),
-        // Change Notifier
         ChangeNotifierProvider(create: (_) => AppStateProvider()),
-        // Blocs
         BlocProvider<AuthCubit>(
           lazy: true,
-          create: (context) => AuthCubit(context.read<AuthRepositoryImpl>()),
+          create: (context) => AuthCubit(repository: AuthRepositoryImpl()),
         ),
         BlocProvider<ProfileCubit>(
           lazy: true,
           create: (context) =>
-              ProfileCubit(context.read<ProfileRepositoryImpl>()),
+              ProfileCubit(repository: ProfileRepositoryImpl()),
         ),
         BlocProvider<UserCubit>(
           lazy: true,
-          create: (context) => UserCubit(context.read<UserRepositoryImpl>()),
+          create: (context) => UserCubit(repository: UserRepositoryImpl()),
         ),
         BlocProvider<ProductCubit>(
           lazy: true,
           create: (context) =>
-              ProductCubit(context.read<ProductRepositoryImpl>()),
+              ProductCubit(repository: ProductRepositoryImpl()),
         ),
         BlocProvider<CartCubit>(
           lazy: true,
-          create: (context) => CartCubit(context.read<CartRepositoryImpl>()),
+          create: (context) => CartCubit(repository: CartRepositoryImpl()),
         ),
         BlocProvider<PostCubit>(
           lazy: true,
-          create: (context) => PostCubit(context.read<PostRepositoryImpl>()),
+          create: (context) => PostCubit(repository: PostRepositoryImpl()),
         ),
       ],
       child: MaterialApp.router(

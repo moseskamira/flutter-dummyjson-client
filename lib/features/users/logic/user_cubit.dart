@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class UserCubit extends Cubit<UserState> {
   final UserRepository repository;
 
-  UserCubit(this.repository) : super(Initial());
+  UserCubit({required this.repository}) : super(Initial());
 
   Future<void> getUsers() async {
     emit(UsersLoading());

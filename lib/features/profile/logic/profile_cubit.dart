@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository repository;
 
-  ProfileCubit(this.repository) : super(Initial());
+  ProfileCubit({required this.repository}) : super(Initial());
 
   Future<void> getProfile() async {
     emit(LoadingState());

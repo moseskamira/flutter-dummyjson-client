@@ -101,7 +101,11 @@ class _HomePageState extends State<HomePage> {
                     if (categories.isNotEmpty) {
                       final firstCategory = categories.first;
                       final firstCatName = firstCategory.name ?? '';
-                      providerRead.updateProductCategory(firstCatName);
+                      if (mounted) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          providerRead.updateProductCategory(firstCatName);
+                        });
+                      }
                     }
                     return SizedBox(
                       height: 80,
