@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository repository;
 
-  AuthCubit(this.repository) : super(LoginInitial());
+  AuthCubit({required this.repository}) : super(LoginInitial());
 
   Future<void> login(LoginRequest request) async {
     emit(LoginLoadingState());

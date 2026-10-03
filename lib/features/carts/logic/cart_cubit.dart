@@ -8,7 +8,7 @@ import '../data/models/carts_response.dart';
 class CartCubit extends Cubit<CartState> {
   final CartRepository repository;
 
-  CartCubit(this.repository) : super(Initial());
+  CartCubit({required this.repository}) : super(Initial());
 
   Future<void> getCarts() async {
     emit(CartsLoading());

@@ -9,7 +9,7 @@ import '../data/models/product_response.dart';
 class ProductCubit extends Cubit<ProductState> {
   final ProductRepository repository;
 
-  ProductCubit(this.repository) : super(Initial());
+  ProductCubit({required this.repository}) : super(Initial());
 
   List<Category> _categories = [];
   List<Product> _products = [];

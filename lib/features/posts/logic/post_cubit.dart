@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PostCubit extends Cubit<PostState> {
   final PostRepository repository;
 
-  PostCubit(this.repository) : super(Initial());
+  PostCubit({required this.repository}) : super(Initial());
 
   Future<void> getPosts() async {
     emit(PostsLoading());
